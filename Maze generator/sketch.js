@@ -4,6 +4,8 @@ var grid = [];
 
 var current;
 
+var stack = [];
+
 function setup(){
     createCanvas(400,400);
     //floor aby na pewno uzyskać integer
@@ -34,11 +36,17 @@ function draw(){
         //Krok 1 
         neighbor.visited = true;
 
+        //Step 2 
+        stack.push(current);
+
         //Krok 3 
         removeWalls(current,neighbor);
 
         //Krok 4
         current = neighbor;
+    }else if(stack.length > 0){
+        var cell = stack.pop();
+        current = cell; 
     }
 }
 
