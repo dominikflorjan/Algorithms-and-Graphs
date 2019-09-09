@@ -32,7 +32,7 @@ class Tree {
     }
 
     traverse() {
-        this.root.visit();
+        this.root.visit(this.root);
     }
     search(val) {
         var found = this.root.search(val);
@@ -54,6 +54,8 @@ class Node {
         if (n.value < this.value) {
             if (this.left == null) {
                 this.left = n;
+                this.left.x = this.x - 50;
+                this.left.y = this.y + 20;
             }
             else {
                 this.left.addNode(n);
@@ -62,21 +64,27 @@ class Node {
         else if (n.value > this.value) {
             if (this.right == null) {
                 this.right = n;
+                this.right.x = this.x + 50;
+                this.right.y = this.y + 20;
             }
             else {
                 this.right.addNode(n);
             }
         }
     }
-    visit() {
+    visit(parent) {
         if (this.left != null) {
-            this.left.visit();
+            this.left.visit(this);
         }
         console.log(this.value);
         fill(255);
-        text(this.value,this.)
+        noStroke();
+        text(this.value,this.x, this.y);
+        stroke(255);
+        line(parent.x, parent.y, this.x, this.y);
+
         if (this.right != null) {
-            this.right.visit();
+            this.right.visit(this);
         }
     }
     search(val) {
